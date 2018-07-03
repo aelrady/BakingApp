@@ -1,0 +1,4 @@
+#Mon Jul 02 20:31:14 EDT 2018
+base.0=/Users/ashleyelrady/AndroidStudioProjects/BakingApp/app/build/intermediates/transforms/dexMerger/debug/0
+path.0=classes.dex
+renamed.0=classes.dex
