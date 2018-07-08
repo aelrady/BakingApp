@@ -40,21 +40,21 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
     private void populateRecipeDetailActivity() {
         ArrayList<Step> recipeSteps = (ArrayList<Step>) recipe.getSteps();
-        ArrayList<String> steps = new ArrayList<>();
+        ArrayList<String> stepNames = new ArrayList<>();
         for (Step step : recipeSteps) {
-            steps.add(step.getShortDescription());
+            stepNames.add(step.getShortDescription().substring(0,1).toUpperCase() + step.getShortDescription().substring(1).toLowerCase());
         }
 
         ArrayList<Ingredient> recipeIngredients = (ArrayList<Ingredient>) recipe.getIngredients();
         ArrayList<String> ingredients = new ArrayList<>();
         for (Ingredient ingredient : recipeIngredients) {
-            ingredients.add(ingredient.getIngredient());
+            ingredients.add(ingredient.getIngredient().substring(0,1).toUpperCase() + ingredient.getIngredient().substring(1).toLowerCase());
         }
 
         recyclerView = findViewById(R.id.rv_steps);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        recipeDetailAdapter = new RecipeDetailAdapter(RecipeDetailActivity.this, steps);
+        recipeDetailAdapter = new RecipeDetailAdapter(RecipeDetailActivity.this, stepNames, recipeSteps);
         ingredientAdapter = new IngredientAdapter(RecipeDetailActivity.this, ingredients);
 
         populateIngredients();
