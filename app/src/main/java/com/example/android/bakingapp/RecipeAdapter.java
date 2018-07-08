@@ -1,6 +1,7 @@
 package com.example.android.bakingapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,17 +9,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.android.bakingapp.Model.Recipe;
 
 import java.util.ArrayList;
 
-public class RecipeAdapter  extends RecyclerView.Adapter<RecipeAdapter.RecipeAdapterViewHolder> {
+public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeAdapterViewHolder> {
 
+    private Recipe[] mRecipes;
     private ArrayList<String> mRecipeNames;
     private Context mContext;
 
-    public RecipeAdapter(Context context, ArrayList<String> recipeNames) {
+    public RecipeAdapter(Context context, Recipe[] recipes, ArrayList<String> recipeNames) {
         this.mContext = context;
+        this.mRecipes = recipes;
         this.mRecipeNames = recipeNames;
     }
 
@@ -45,18 +49,18 @@ public class RecipeAdapter  extends RecyclerView.Adapter<RecipeAdapter.RecipeAda
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecipeAdapterViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecipeAdapterViewHolder holder, final int position) {
 
         holder.recipeNameTextView.setText(mRecipeNames.get(position));
 
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, "Clicked on recipe", Toast.LENGTH_SHORT).show();
-
+                Intent intent = new Intent(mContext, RecipeDetailActivity.class);
+                intent.putExtra("recipe", mRecipes[position]);
+                mContext.startActivity(intent);
             }
         });
-
     }
 
     @Override
