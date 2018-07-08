@@ -13,14 +13,18 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import com.example.android.bakingapp.Model.Step;
+
 public class RecipeDetailAdapter extends RecyclerView.Adapter<RecipeDetailAdapter.RecipeDetailAdapterViewHolder> {
 
     private ArrayList<String> mRecipeSteps;
     private Context mContext;
+    private ArrayList<Step> mSteps;
 
-    public RecipeDetailAdapter(Context context, ArrayList<String> recipeSteps) {
+    public RecipeDetailAdapter(Context context, ArrayList<String> recipeSteps, ArrayList<Step> steps) {
         this.mContext = context;
         this.mRecipeSteps = recipeSteps;
+        this.mSteps = steps;
     }
 
     public class RecipeDetailAdapterViewHolder extends RecyclerView.ViewHolder {
@@ -46,7 +50,7 @@ public class RecipeDetailAdapter extends RecyclerView.Adapter<RecipeDetailAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecipeDetailAdapterViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecipeDetailAdapterViewHolder holder, final int position) {
 
         holder.recipeStepTextView.setText(mRecipeSteps.get(position));
 
@@ -54,7 +58,7 @@ public class RecipeDetailAdapter extends RecyclerView.Adapter<RecipeDetailAdapte
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, StepDetailActivity.class);
-                //intent.putExtra("recipe", mRecipes[position]);
+                intent.putExtra("step", mSteps.get(position));
                 mContext.startActivity(intent);
 
             }
@@ -67,4 +71,5 @@ public class RecipeDetailAdapter extends RecyclerView.Adapter<RecipeDetailAdapte
         return mRecipeSteps.size();
     }
 }
+
 
