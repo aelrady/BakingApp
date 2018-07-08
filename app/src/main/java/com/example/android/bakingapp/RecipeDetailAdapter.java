@@ -1,6 +1,7 @@
 package com.example.android.bakingapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -52,7 +53,9 @@ public class RecipeDetailAdapter extends RecyclerView.Adapter<RecipeDetailAdapte
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, "Clicked on step", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext, StepDetailActivity.class);
+                //intent.putExtra("recipe", mRecipes[position]);
+                mContext.startActivity(intent);
 
             }
         });
@@ -64,3 +67,4 @@ public class RecipeDetailAdapter extends RecyclerView.Adapter<RecipeDetailAdapte
         return mRecipeSteps.size();
     }
 }
+
